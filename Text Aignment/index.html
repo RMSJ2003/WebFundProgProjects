@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Align</title>
+    <style>
+        p {
+            text-align: justify;
+        }
+
+        .contain {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            height: 500px;
+            width: 100%;
+            border: 2px solid red;
+        }
+
+        .flex-content {
+            width: 80%;
+            height: 50px;
+            background-color: black;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .parent {
+            display: flex;
+            align-items: space-evenly;
+            border: 4px solid black;
+            height: 70px;
+            padding: 10px;
+        }
+
+        .child {
+            flex: 1;
+            background-color: red;
+        }
+
+        .button {
+            padding: 5px;
+            text-decoration: none;
+            text-emphasis: none;
+            border: 1px solid red;
+        }
+
+        .button:hover {
+            text-decoration: underline;
+            background-color: red;
+            opacity: 0.7;
+            color: white;
+        }
+
+        .button:active {
+            color: green;
+            background-color: orange;
+        }
+
+        .new-button:visited {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contain">
+        <div class="flex-content">
+        </div>
+        <div class="flex-content">
+        </div>
+        <div class="flex-content">
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="parent">
+        <div class="child">
+
+        </div>
+        <div class="child">
+
+        </div>
+    </div>
+
+    <br><br>
+
+    <a class="button" href="#">link</a>
+
+    <a class="new-button" href="new.html">New</a>
+</body>
+</html>

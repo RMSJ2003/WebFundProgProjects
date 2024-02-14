@@ -1,0 +1,31 @@
+body {
+    background-color: #EDEDED;
+}
+
+h1 {
+    color: #DA0037;
+    font-family: Verdana;
+}
+
+.container {
+    background-color: #444444;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+    padding: 20px;
+}
+
+.movie-container {
+    background-color: #EDEDED;
+    text-align: center;
+    width: 400px;
+    height: 450px;
+}
+
+.movie-image > img{
+    width: 200px;
+    height: 200px;
+}
+
