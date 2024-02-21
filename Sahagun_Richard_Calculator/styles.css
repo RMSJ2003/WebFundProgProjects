@@ -1,0 +1,36 @@
+body { margin: 0; }
+
+
+form {
+    margin: 100px auto auto 100px;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    padding: 10px;
+    width: 300px;
+}
+
+input[id="num"] {
+    width: 96.5%;
+}
+
+.margin-top {
+    margin-top: 10px;
+}
+.operation {
+    padding: 10px 15px;
+}
+
+.operations-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nums-and-equal-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.num {
+    padding: 25px 30px;
+}
