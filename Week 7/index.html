@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7</title>
+</head>
+
+<body>
+
+
+    <form>
+        <label for="num1"></label>
+        <input type="number" name="num1" id="num1">
+        <label for="num2"></label>
+        <input type="number" name="num2" id="num2">
+
+        <input type="button" onclick="add()" value="ADD">
+        <input type="button" onclick="subtract()" value="SUBTRACT">
+        <input type="button" onclick="multiply()" value="MULTIPLY">
+        <input type="button" onclick="divide()" value="DIVIDE">
+
+    </form> 
+
+    <p id="answer"></p>
+
+
+
+
+
+    <script type="text/javascript">
+
+        function add() {
+            const num1 = parseInt(document.getElementById("num1").value);
+            const num2 = parseInt(document.getElementById("num2").value);
+            displayAnswer(num1 + num2);
+        }
+
+        function subtract() {
+            const num1 = parseInt(document.getElementById("num1").value);
+            const num2 = parseInt(document.getElementById("num2").value);
+            displayAnswer(num1 - num2);
+        }
+
+        function multiply() {
+            const num1 = parseInt(document.getElementById("num1").value);
+            const num2 = parseInt(document.getElementById("num2").value);
+            displayAnswer(num1 * num2);
+
+        }
+
+        function divide() {
+            const num1 = parseInt(document.getElementById("num1").value);
+            const num2 = parseInt(document.getElementById("num2").value);
+            displayAnswer(num1 / num2);
+        }
+
+        function displayAnswer(ans) {
+            document.getElementById("answer").innerHTML = ans;
+        }
+    </script>
+</body>
+
+</html>
