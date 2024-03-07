@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      function myFunction(){
+        var clickMeBtn = document.getElementById('clickMe')
+        clickMeBtn.addEventListener('click',clickFunction)
+
+        var buttons = document.getElementsByClassName('clickBtn')
+
+        console.log(buttons)
+        for (var i = 0; i < buttons.length; i++) {
+          buttons[i].addEventListener('click',clickFunction)
+        }
+
+        //document.getElementById('input1').addEventListener('input',inputFunction)
+
+        var inputs = document.getElementsByClassName('inp')
+        console.log(inputs)
+        for (var i = 0; i < inputs.length; i++) {
+          inputs[i].addEventListener('input',operate)
+        }
+
+        var addCartBtn = document.getElementsByClassName('addCart')
+        console.log(addCartBtn)
+        for (var i = 0; i < addCartBtn.length; i++) {
+          addCartBtn[i].addEventListener('click',addToCart)
+        }
+      }
+
+      function addToCart(event){
+        console.log(event.target)
+        var button = event.target
+        var parentContainer = button.parentElement
+        console.log(parentContainer)
+
+        var imgSrc = parentContainer.getElementsByClassName('imgClass')[0].src
+        console.log(imgSrc)
+        console.log(parentContainer.getElementsByClassName('item-name'))
+        var itemName = parentContainer.getElementsByClassName('item-name')[0].innerHTML
+        console.log(itemName)
+        var itemPrice = parentContainer.getElementsByClassName('item-price')[0].innerHTML
+        console.log(itemPrice)
+        var finalPrice = itemPrice.replace('Php ','')
+        console.log(finalPrice)
+
+        var targetContainer = document.getElementById('cart')
+
+        var itemNames = targetContainer.getElementsByClassName('item-names')
+        var isExist = false;
+        for (var i = 0; i < itemNames.length; i++) {
+          if(itemNames[i].innerHTML == itemName){
+            console.log(isExist)
+            isExist = true;
+          }
+        }
+
+        if(!isExist){
+          console.log(isExist)
+        }
+
+        var newElement = document.createElement('div')
+        newElement.classList.add('items-div')
+        newElement.classList.add('another-class')
+        console.log(newElement)
+
+        newElement.innerHTML =
+        ` <img src="${imgSrc}" alt="">
+          <h1 class="item-name">${itemName}</h1>
+          <p class="item-price">${itemPrice}</p>
+        `
+
+        console.log(newElement)
+        targetContainer.append(newElement)
+      }
+
+      function operate(){
+        var inputs = document.getElementsByClassName('inp')
+        var total = 0
+        for (var i = 0; i < inputs.length; i++) {
+          total += Number(inputs[i].value)
+        }
+
+        document.getElementById('display').innerHTML = total
+      }
+      function clickFunction(){
+        alert("YOU HAVE CLICKED")
+      }
+
+      function inputFunction(){
+        var input = document.getElementById('input1').value
+        document.getElementById('display').innerHTML = input
+      }
+    </script>
+  </head>
+  <body onload="myFunction()">
+    <button class="clickBtn" id="clickMe" type="button" name="button">Click Me!</button>
+    <button class="clickBtn" id="clickMe2" type="button" name="button">Click Me!</button>
+    <button class="clickBtn" id="clickMe3" type="button" name="button">Click Me!</button>
+    <button class="clickBtn" id="clickMe4" type="button" name="button">Click Me!</button>
+    <button class="clickBtn" id="clickMe5" type="button" name="button">Click Me!</button>
+
+    <p id="display">Current Display</p>
+    <input class="inp" type="number" value='0'>
+    <input class="inp" type="number" value='0'>
+    <!--
+      onclick /
+      onchange /
+      oninput /
+      onkeyup /
+      onkeydown /
+      onload /
+      addEventListener /
+    -->
+
+    <div class="cart" id="cart">
+
+    </div>
+
+    <div class="items">
+        <img class="imgClass" src="img.png" alt="">
+      <h2 class="item-name">Item 1</h2>
+      <p class="item-price">Php 12.00</p>
+      <button class="addCart" type="button" name="button" id="button1">ADD TO CART</button>
+    </div>
+
+    <div class="items">
+      <h2 class="item-name">Item 2</h2>
+      <p class="item-price">Php 24.00</p>
+      <button class="addCart" type="button" name="button" id="button2">ADD TO CART</button>
+    </div>
+
+  </body>
+</html>
