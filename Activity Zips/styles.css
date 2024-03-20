@@ -1,0 +1,100 @@
+:root {
+    --first-color: #F8F8F8;
+    --second-color: #F1D6AB;
+    --third-color: #E3B04B;
+    --fourth-color: #2B2B28;
+    --x-margin: 50px;
+}
+
+body { 
+    margin: 0; 
+    background-image: url("./Pekkape.png");
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
+
+.final-boss-container, .store-boss-container {
+    opacity: 90%;
+}
+
+.final-boss-container {
+    float: left;
+    width: 90%;
+    margin: var(--x-margin) 5%;
+    background-color: var(--third-color);
+    display: flex;
+    justify-content: space-around;
+}
+
+.store-boss-container {
+    float: left;
+    width: 60%;
+    background-color: var(--first-color);
+    margin: 20px auto;
+}
+
+.cart-boss-container {
+    float: left;
+    width: 25%;
+    background-color: var(--first-color);
+    margin: 20px auto;
+}
+
+h2, h3 {
+    margin: var(--x-margin) 10%;
+}
+
+#storeTable {
+    border-collapse: collapse;
+    width: 80%;
+    margin: auto 10% var(--x-margin) 10%;
+}
+
+#storeTable td, th {
+    border: 1px solid var(--fourth-color);
+}
+
+#storeTable .item-heading {
+    width: 60%;
+}
+
+#storeTable .price-heading, .action-heading {
+    width: 20%;
+}
+
+#cartTable {
+    width: 80%;
+    margin: auto 10% var(--x-margin) auto;
+}
+
+#cartTable td, th {
+    border: 0;
+}
+
+#cartTable .item-heading {
+    width: 50%;
+}
+
+#cartTable .price-heading, .action-heading {
+    width: 25%;
+}
+
+input {
+    float: right;
+    width: 40px;
+}
+
+.heading-row {
+    background-color: var(--third-color);
+}
+
+h4 {
+    margin-left: 10%;
+    float: left;
+}
+
+#total {
+    float: right;
+    margin-right: 10%;
+}
