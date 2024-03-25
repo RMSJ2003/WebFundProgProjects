@@ -10,7 +10,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- External CSS for this page -->
-    <link rel="stylesheet" href="./css/orderForm.css">
+    <link rel="stylesheet" href="./css/orderConfirmation.css">
 
     <!-- External CSS for Presets -->
     <link rel="stylesheet" href="./css/presets.css">
@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 
-    <title>Index Page</title>
+    <title>Order Confirmation Page</title>
 </head>
 
 <body>
@@ -68,46 +68,45 @@
 
     <!-- User Info Section -->
     <section class="section-width-max float-left second-bg-color user-info-section">
-        <form action="" method="post" class="float-left edge-space-s" id="userInfoForm">
+        <div class="float-left edge-space-s" id="userInfoForm">
             <h3 class="mt-5 fw-bold header-font fourth-font-color">——— USER INFORMATION ———</h3>
             <div class="section-width-max mt-5 float-left">
                 <div class="label-container float-left">
                     <label for="fnameInput" class="body-font float-left">First Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="fnameInput" name="fnameInput" class="float-right body-font fourth-font-color">
+                    <p id="fnameInput" class="float-right body-font fourth-font-color">: Richard</p>
                 </div>
             </div>
-            <div class="section-width-max mt-2 float-left">
+            <div class="section-width-max float-left">
                 <div class="label-container float-left">
-                    <label for="lnameInput" class="body-font float-left">Last Name</label>
+                    <label for="fnameInput" class="body-font float-left">Last Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="lnameInput" name="lnameInput" class="float-right body-font fourth-font-color">
+                    <p id="lnameInput" class="float-right body-font fourth-font-color">: Sahagun</p>
                 </div>
             </div>
-            <div class="section-width-max mt-2 float-left">
+            <div class="section-width-max float-left">
                 <div class="label-container float-left">
-                    <label for="shippingAddressInput" class="body-font float-left">Shipping Address</label>
+                    <label for="fnameInput" class="body-font float-left">Shipping Address</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="shippingAddressInput" name="shippingAddressInput" class="float-right body-font fourth-font-color">
+                    <p id="lnameInput" class="float-right body-font fourth-font-color">: 8902 **** St. Brgy. **** Makati City</p>
                 </div>
             </div>
-            <div class="section-width-max mt-2 float-left">
+            <div class="section-width-max float-left">
                 <div class="label-container float-left">
-                    <label for="contactInput" class="body-font float-left">Contact Number</label>
+                    <label for="fnameInput" class="body-font float-left">Contact Number</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="tel" id="contactInput" name="contactInput" class="float-right body-font fourth-font-color">
+                    <p id="lnameInput" class="float-right body-font fourth-font-color">: 09154770***</p>
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
-                <input type="button" value="Place Order" class="button2 fourth-bg-color float-left">
-                <input type="button" value="Cancel Order" class="button2 fourth-bg-color float-right">
-
+                <button class="button2 fourth-bg-color float-left">Back to HOME</button>
+                <button class="button2 fourth-bg-color float-right">CONFIRM ORDER</button>
             </div>
-        </form>
+        </div>
     </section>
 
 
