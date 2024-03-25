@@ -13,6 +13,7 @@ body {
     --border-radius: 10px;
     --navbar-height: 100px;
     --first-section: 105px; 
+    --section-width: 95%
 }
 
 /* Navigation Bar */
@@ -106,9 +107,54 @@ body {
     background-size: 35px 35px;
 }
 
-/* Menu Section */
+/* Product Section */
+
+.product-section {
+    height: 500px;
+}
+
+.product-text-container, .product-img-container {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.product-name {
+    width: 100%;
+}
+
+.btn-and-price-container {
+    width: 100%;
+}
+
+.product-img {
+    width: 500px;
+    height: 500px;
+}
 
 /* Preset */
+.section-width {
+    width: var(--section-width);
+}
+
+.edge-space-s {
+    margin-left: var(--edge-space);
+}
+
+.edge-space-e {
+    margin-right: var(--edge-space);
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
 
 .header-font {
     font-family: var(--header-font);
@@ -126,6 +172,10 @@ body {
 
 .second-font-color {
     color: var(--second-color);
+}
+
+.third-font-color {
+    color: var(--third-color);
 }
 
 .fourth-font-color {
@@ -176,4 +226,18 @@ body {
 .price-position {
     float: left;
     margin-left: 45px;
+}
+
+.justify-text {
+    text-align: justify;
+}
+
+.link {
+    text-decoration: underline;
+    color: var(--third-color);
+}
+
+.link:hover {
+    transition: .5s;
+    color: var(--fourth-color);
 }
