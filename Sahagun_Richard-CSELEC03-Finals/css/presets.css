@@ -106,6 +106,7 @@ body {
     transition: .5s;
     background-image: url("../img/cart-hovered.png");
     background-size: 35px 35px;
+    cursor: pointer;
 }
 
 /* Preset */
@@ -236,3 +237,5 @@ input[type="text"] {
     transition: .5s;
     color: var(--second-color);
 }
+
+/* Modal */
