@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-image: url("../img/index-page-background.png");
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 :root {
@@ -155,6 +156,8 @@ body {
     font-family: var(--header-font);
     color: var(--third-color);
     text-align: center;
+    width: 100%;
+    cursor: pointer;
 }
 
 .product-link:hover {
@@ -246,6 +249,11 @@ h4 {
     margin-left: 45px;
 }
 
+.menu-item-name {
+    background: 0;
+    border: 0;
+}
+
 /* Cart Modal */
 .cart-modal {
     background-color: var(--second-color);
@@ -261,7 +269,7 @@ h4 {
 .cart-item-img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .checkbox-container {

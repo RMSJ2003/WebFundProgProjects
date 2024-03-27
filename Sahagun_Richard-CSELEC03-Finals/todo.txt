@@ -1,0 +1,2 @@
+- clean code and avoid redundancy
+- Add total items and price to cart

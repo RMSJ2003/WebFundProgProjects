@@ -25,6 +25,7 @@
 .product-img {
     width: 500px;
     height: 500px;
+    object-fit: contain;
 }
 
 /* Preset */
@@ -132,4 +133,8 @@
 .link:hover {
     transition: .5s;
     color: var(--fourth-color);
+}
+
+span[onclick="returnHome()"] {
+    cursor: pointer;
 }

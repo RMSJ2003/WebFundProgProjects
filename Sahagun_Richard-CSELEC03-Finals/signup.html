@@ -37,7 +37,7 @@
 
     <!-- Body -->
     <section class="login-section">
-        <form class="form-signin login-form">
+        <div class="form-signin login-form">
             <div class="logo-form-container">
                 <img class="mb-4 logo-form" src="./img/Logo.png" alt="" width="150" height="150">
 
@@ -48,11 +48,11 @@
                 autofocus="">
             <label for="inputPassword" class="sr-only mt-3">Password</label>
             <input type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required="">
-            <button class="btn btn-lg btn-block custom login-button" type="submit">Sign up</button>
+            <button class="btn btn-lg btn-block custom login-button" onclick="signUp()">Sign up</button>
 
-            <button class="btn btn-lg btn-block custom login-button" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-block custom login-button" onclick="login()">Sign in</button>
 
-        </form>
+        </div>
 
 
     </section>
@@ -60,6 +60,47 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <script>
+        function signUp() {
+            const usernameInput = document.getElementById("inputEmail").value;
+            const passwordInput = document.getElementById("inputPassword").value;
+            
+            if (validUsername()) {
+                sessionStorage.setItem(usernameInput, JSON.stringify(
+                    {
+                        username: usernameInput,
+                        password: passwordInput,
+                        cart: []
+                    }
+                ));
+                alert("New account created!")
+                location.replace("./login.html");
+            } else alert("Username already exists!");
+            
+
+            function validUsername() {
+                // Iterate over the keys in sessionStorage
+                for (let key in sessionStorage) {
+                    // Retrieve the value associated with the key
+                    const existingUser = sessionStorage.getItem(key);
+                    // Parse the value to get the user object
+                    const user = JSON.parse(existingUser);
+                    // Check if the username matches the input username
+                    if (user && user.username === usernameInput) {
+                        // Username already exists
+                        return false;
+                    }
+                }
+                // Username is valid (doesn't exist in sessionStorage)
+                return true;
+            }
+        }
+
+        function login() {
+            location.replace("./login.html");
+        }
+    </script>
 </body>
 
 </html>

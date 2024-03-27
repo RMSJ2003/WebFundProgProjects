@@ -2,6 +2,7 @@ body {
     margin: 0;
     background-image: url("../img/login-page-background.png");
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 :root {
