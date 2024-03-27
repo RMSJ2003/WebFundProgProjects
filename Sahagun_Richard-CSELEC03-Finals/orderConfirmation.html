@@ -35,7 +35,7 @@
         <div class="line">
 
         </div>
-        <h2 class="username">MyUserName</h2>
+        <h2 class="username"></h2>
     </div>
 
     <!-- Cart Summary Section -->
@@ -64,7 +64,7 @@
                     <label for="fnameInput" class="body-font float-left">First Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="fname" class="float-right body-font fourth-font-color"></p>
+                    <p class="float-right body-font fourth-font-color">: <span id="fname"></span></p>
                 </div>
             </div>
             <div class="section-width-max float-left">
@@ -72,7 +72,7 @@
                     <label for="fname" class="body-font float-left">Last Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="lname" class="float-right body-font fourth-font-color">: Sahagun</p>
+                    <p class="float-right body-font fourth-font-color">: <span id="lname"></span></p>
                 </div>
             </div>
             <div class="section-width-max float-left">
@@ -80,8 +80,7 @@
                     <label for="fnameInput" class="body-font float-left">Shipping Address</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="shippingAddress" class="float-right body-font fourth-font-color">: 8902 **** St. Brgy. **** Makati
-                        City</p>
+                    <p class="float-right body-font fourth-font-color">: <span id="shippingAddress"></span></p>
                 </div>
             </div>
             <div class="section-width-max float-left">
@@ -89,7 +88,7 @@
                     <label for="fnameInput" class="body-font float-left">Contact Number</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="contact" class="float-right body-font fourth-font-color">: 09154770***</p>
+                    <p class="float-right body-font fourth-font-color">: <span id="contact"></span></p>
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
@@ -112,8 +111,16 @@
         }
 
         sessionStorage.removeItem("CURRENTPRODUCT");
+
+        validateCart();
+
+        validateUserInfo();
+
         updateCartDisplay();
+
         displayUserInformation();
+
+
 
         function updateCartDisplay() {
             const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
@@ -156,6 +163,7 @@
 
             const userInfo = JSON.parse(sessionStorage.getItem(currentUser.username)).userInformation;
 
+            document.getElementsByClassName("username")[0].innerHTML = currentUser.username;
             document.getElementById("fname").innerHTML = userInfo.firstName;
             document.getElementById("lname").innerHTML = userInfo.lastName;
             document.getElementById("shippingAddress").innerHTML = userInfo.shippingAddress;
@@ -168,6 +176,47 @@
             userAccount.cart = [];
 
             sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount))
+
+            alert("Order Confirmed!");
+            location.replace("./index.html");
+        }
+
+
+        function validateUserInfo() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+
+            if (!userAccount.userInformation) {
+                invalid();
+            }
+
+            const userInfoFilled = 
+                userAccount.userInformation.firstName &&
+                userAccount.userInformation.lastName &&
+                userAccount.userInformation.shippingAddress &&
+                userAccount.userInformation.contactNumber
+            ;
+
+            if (!userInfoFilled) {
+                invalid();
+            }
+
+            function invalid() {
+                alert("Please fill out ALL user information before confirming order!");
+                location.replace("./orderForm.html");
+            }
+
+        }
+
+
+        function validateCart() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+
+            if (userAccount.cart.length === 0) {
+                alert("Please make sure your cart is not empty before proceeding to order confirmation!");
+                location.replace("./index.html");   
+            }
         }
     </script>
 </body>

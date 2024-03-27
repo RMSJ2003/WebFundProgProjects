@@ -79,6 +79,21 @@ function getProductItems() {
 
 // Dinidisplay ang mga product sa HTML front-end
 function displayProducts(products) {
+    // clears the display products before displaying products
+    document.querySelector(".menu-section").innerHTML = ""; 
+
+    const searchItems = JSON.parse(sessionStorage.getItem("SEARCH"));
+
+    if (!searchItems) {
+        actuallyDisplayProducts(products);
+    } else {
+        actuallyDisplayProducts(searchItems);
+        sessionStorage.removeItem("SEARCH");
+    }
+}
+
+
+function actuallyDisplayProducts(products) {
     for (let i = 0; i < products.length; i++) {
         // Since tatlong menu per row, gagamit tayo ng for loop
         if (i % 3 == 0) {
@@ -107,6 +122,7 @@ function displayProducts(products) {
         newLayer.appendChild(menuContainer);
     }
 }
+
 
 // Fetch and display products for index page
 setProductItems();
@@ -192,7 +208,7 @@ function updateCartDisplay() {
                 <div class="checkbox-container float-left">
                     <input type="checkbox" class="float-left select-item">
                 </div>
-                <img src="${item.imgSource}" alt="OODIFY THIS" class="cart-item-img float-left">
+                <img src="${item.imgSource}" alt="${item.name}" class="cart-item-img float-left">
                 <div class="item-name-container float-left">
                     <h5 class="fw-bold ms-5 cart-item-name body-font float-left fourth-font-color">${item.qty}x <span
                         class="header-font fourth-font-color">——— </span><span class="item-name">${item.name}</span> <span
@@ -241,4 +257,25 @@ function deleteSelectedItems() {
         sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount));
         updateCartDisplay();
     }
+}
+
+function search() {
+    const searchItem = document.getElementById("search").value.trim().toLowerCase();
+
+    var itemsToDisplay = [];
+    
+    JSON.parse(localStorage.getItem("productItems")).forEach(item => {
+        if (item.name.toLowerCase().includes(searchItem)) {
+            itemsToDisplay.push(item);
+        }
+    });
+
+    displayProducts(itemsToDisplay);
+
+
+}
+
+
+function placeOrder() {
+    location.replace("./orderForm.html");
 }

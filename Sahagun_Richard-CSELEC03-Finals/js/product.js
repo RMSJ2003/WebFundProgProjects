@@ -1,6 +1,12 @@
 var displayItem;
 
 window.addEventListener("load", () => {
+    if (!sessionStorage.getItem("CURRENTUSER")) {
+        location.replace("./login.html");
+    }
+
+    displayUsername();
+
     const getProductName = sessionStorage.getItem("CURRENTPRODUCT");
 
     const productItems = JSON.parse(localStorage.getItem("productItems"));
@@ -11,6 +17,8 @@ window.addEventListener("load", () => {
             document.getElementById("productLongDesc").innerHTML = item.longDescription;
             document.getElementById("productPrice").innerHTML = item.price;
             document.getElementsByClassName("product-img")[0].src = item.imgSource;
+            document.getElementsByClassName("product-img")[0].alt = item.name;
+
 
             displayItem = {
                 name: item.name,
@@ -22,6 +30,14 @@ window.addEventListener("load", () => {
         }
     });
 });
+
+
+function displayUsername() {
+    const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+
+    document.getElementsByClassName("username")[0].innerHTML = currentUser.username;
+}
+
 
 function returnHome() {
     sessionStorage.removeItem("CURRENTPRODUCT");
@@ -137,7 +153,7 @@ function updateCartDisplay() {
                 <div class="checkbox-container float-left">
                     <input type="checkbox" class="float-left select-item">
                 </div>
-                <img src="${item.imgSource}" alt="OODIFY THIS" class="cart-item-img float-left">
+                <img src="${item.imgSource}" alt="${item.name}" class="cart-item-img float-left">
                 <div class="item-name-container float-left">
                     <h5 class="fw-bold ms-5 cart-item-name body-font float-left fourth-font-color">${item.qty}x <span
                         class="header-font fourth-font-color">——— </span><span class="item-name">${item.name}</span> <span
@@ -186,4 +202,27 @@ function deleteSelectedItems() {
         sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount));
         updateCartDisplay();
     }
+}
+
+
+function search() {
+    const searchItem = document.getElementById("search").value.trim().toLowerCase();
+
+    var itemsToDisplay = [];
+    
+    JSON.parse(localStorage.getItem("productItems")).forEach(item => {
+        if (item.name.toLowerCase().includes(searchItem)) {
+            itemsToDisplay.push(item);
+        }
+    });
+
+    sessionStorage.setItem("SEARCH", JSON.stringify(itemsToDisplay));
+    
+    location.replace("./index.html");
+
+}
+
+
+function placeOrder() {
+    location.replace("./orderForm.html");
 }

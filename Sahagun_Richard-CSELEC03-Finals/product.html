@@ -35,15 +35,15 @@
         <div class="line">
 
         </div>
-        <h2 class="username">MyUserName</h2>
+        <h2 class="username"></h2>
         <a data-bs-toggle="modal" data-bs-target="#exampleModal">
             <div class="cart" onclick="updateCartDisplay()">
             </div>
         </a>
-        <form action="" class="search-form">
-            <input type="submit" value="Search" class="search-button">
-            <input type="text" id="search" name="search" class="search-textbox">
-        </form>
+        <div class="search-form">
+            <input type="submit" value="Search" class="search-button" onclick="search()">
+            <input type="text" id="search" name="search" class="search-textbox" placeholder="Search Item">
+        </div>
     </div>
 
     <!-- Product Section -->
@@ -101,7 +101,7 @@
                     <button type="button" class="button2 danger-button" onclick="deleteSelectedItems()">DELETE</button>
 
                     <button type="button" class="button2" onclick="selectAll()" id="selectAllBtn">Select All</button>
-                    <button type="button" class="button2" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="button2" data-bs-dismiss="modal" onclick="placeOrder()">Place Order</button>
                 </div>
             </div>
         </div>

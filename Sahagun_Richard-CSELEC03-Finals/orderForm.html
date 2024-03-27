@@ -35,7 +35,7 @@
         <div class="line">
 
         </div>
-        <h2 class="username">MyUserName</h2>
+        <h2 class="username"></h2>
     </div>
 
     <!-- Cart Summary Section -->
@@ -115,8 +115,13 @@
             location.replace("./login.html");
         }
 
+        validateCart();
+
         sessionStorage.removeItem("CURRENTPRODUCT");
+
         updateCartDisplay();
+
+        presetUserInfo();
 
         function updateCartDisplay() {
             const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
@@ -174,6 +179,30 @@
             sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount));
 
             location.replace("./orderConfirmation.html");
+        }
+
+
+        function validateCart() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+
+            if (userAccount.cart.length === 0) {
+                alert("Please make sure your cart is not empty before proceeding to order form!");
+                location.replace("./index.html");   
+            }
+        }
+
+
+        function presetUserInfo() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+
+            const userInfo = JSON.parse(sessionStorage.getItem(currentUser.username)).userInformation;
+
+            document.getElementsByClassName("username")[0].innerHTML = currentUser.username;
+            document.getElementById("fnameInput").value = userInfo.firstName;
+            document.getElementById("lnameInput").value = userInfo.lastName;
+            document.getElementById("shippingAddressInput").value = userInfo.shippingAddress;
+            document.getElementById("contactInput").value = userInfo.contactNumber;
         }
     </script>
 </body>
