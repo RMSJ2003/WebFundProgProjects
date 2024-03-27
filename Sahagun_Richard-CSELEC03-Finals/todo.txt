@@ -1,2 +1,12 @@
 - clean code and avoid redundancy
 - Add total items and price to cart
+- Add cart.js and just make functions based on the page
+- Clean HTML codes
+- Remove preset tests innerHTMLs
+- all in one cart.css
+- clear CURRENTPRODUCT AFTER entering all page EXCEP THE PRODUCTPAGE
+- updatecartitemdisplay() is redundant
+- Fix img alts
+- Fix peso symbols
+- Fix buttons and inputs
+- orderform first before confirmation

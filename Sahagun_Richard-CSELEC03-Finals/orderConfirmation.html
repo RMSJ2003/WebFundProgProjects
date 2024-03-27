@@ -41,34 +41,17 @@
     <!-- Cart Summary Section -->
     <section class="pt-5 first-section section-width float-left edge-space-s edge-space-e" id="cartSummarySection">
         <h3 class="mb-5 fw-bold header-font third-font-color">——— CART SUMMARY ———</h3>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
+        <div id="cart-items">
+            <!-- <div class="cart-item-container edge-space-e">
+                <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
+                <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
+                        class="body-font third-font-color">P55.00</span></h3>
+            </div> -->
         </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-
-        <h4 class="mt-5 fw-bold body-font fourth-font-color float-left section-width-max">Cart Total: P999.00</h4>
-        <h4 class="mb-5 fw-bold body-font fourth-font-color float-left  section-width-max">Number of Items: 4</h4>
+        <h4 class="mt-5 fw-bold body-font fourth-font-color float-left section-width-max">Cart Total: P<span
+                id="totalPrice"></span></h4>
+        <h4 class="mb-5 fw-bold body-font fourth-font-color float-left  section-width-max">Number of Items: <span
+                id="totalItems"></span></h4>
 
     </section>
 
@@ -81,15 +64,15 @@
                     <label for="fnameInput" class="body-font float-left">First Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="fnameInput" class="float-right body-font fourth-font-color">: Richard</p>
+                    <p id="fname" class="float-right body-font fourth-font-color"></p>
                 </div>
             </div>
             <div class="section-width-max float-left">
                 <div class="label-container float-left">
-                    <label for="fnameInput" class="body-font float-left">Last Name</label>
+                    <label for="fname" class="body-font float-left">Last Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="lnameInput" class="float-right body-font fourth-font-color">: Sahagun</p>
+                    <p id="lname" class="float-right body-font fourth-font-color">: Sahagun</p>
                 </div>
             </div>
             <div class="section-width-max float-left">
@@ -97,7 +80,7 @@
                     <label for="fnameInput" class="body-font float-left">Shipping Address</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="lnameInput" class="float-right body-font fourth-font-color">: 8902 **** St. Brgy. **** Makati
+                    <p id="shippingAddress" class="float-right body-font fourth-font-color">: 8902 **** St. Brgy. **** Makati
                         City</p>
                 </div>
             </div>
@@ -106,12 +89,12 @@
                     <label for="fnameInput" class="body-font float-left">Contact Number</label>
                 </div>
                 <div class="input-container float-left">
-                    <p id="lnameInput" class="float-right body-font fourth-font-color">: 09154770***</p>
+                    <p id="contact" class="float-right body-font fourth-font-color">: 09154770***</p>
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
-                <button class="button2 fourth-bg-color float-left">Back to HOME</button>
-                <button class="button2 fourth-bg-color float-right">CONFIRM ORDER</button>
+                <button class="button2 fourth-bg-color float-left" onclick="returnHome()">Back to HOME</button>
+                <button class="button2 fourth-bg-color float-right" onclick="confirmOrder()">CONFIRM ORDER</button>
             </div>
         </div>
     </section>
@@ -122,6 +105,71 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <script>
+        if (!sessionStorage.getItem("CURRENTUSER")) {
+            location.replace("./login.html");
+        }
+
+        sessionStorage.removeItem("CURRENTPRODUCT");
+        updateCartDisplay();
+        displayUserInformation();
+
+        function updateCartDisplay() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+            const userCart = userAccount.cart;
+
+            // Clears the innerHTML of modal-body before adding the updated cart
+            document.getElementById("cart-items").innerHTML = "";
+
+            var totalItems = 0;
+            var totalPrice = 0;
+            userCart.forEach(item => {
+                var cartItemContainer = document.createElement("div");
+                cartItemContainer.classList.add("cart-item-container");
+                cartItemContainer.classList.add("edge-space-e");
+
+
+                cartItemContainer.innerHTML = `
+                    <img src="${item.imgSource}" alt="${item.name}" class="cart-item-img float-left">
+                    <h3 class="fw-bold ms-5 cart-item-name header-font float-left">${item.qty}x <span
+                        class="header-font third-font-color">——— ${item.name} ——— <span
+                            class="body-font third-font-color">P${item.price}</span></h3>    
+                `;
+
+                // Append the menu item to the current layer
+                document.getElementById("cart-items").appendChild(cartItemContainer);
+                totalItems += 1;
+                totalPrice += item.price;
+            });
+            document.getElementById("totalItems").innerHTML = totalItems;
+            document.getElementById("totalPrice").innerHTML = totalPrice;
+        }
+
+        function returnHome() {
+            location.replace("./index.html");
+        }
+
+        function displayUserInformation() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+
+            const userInfo = JSON.parse(sessionStorage.getItem(currentUser.username)).userInformation;
+
+            document.getElementById("fname").innerHTML = userInfo.firstName;
+            document.getElementById("lname").innerHTML = userInfo.lastName;
+            document.getElementById("shippingAddress").innerHTML = userInfo.shippingAddress;
+            document.getElementById("contact").innerHTML = userInfo.contactNumber;
+        }
+
+        function confirmOrder() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+            userAccount.cart = [];
+
+            sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount))
+        }
+    </script>
 </body>
 
 </html>

@@ -41,41 +41,31 @@
     <!-- Cart Summary Section -->
     <section class="pt-5 first-section section-width float-left edge-space-s edge-space-e" id="cartSummarySection">
         <h3 class="mb-5 fw-bold header-font third-font-color">——— CART SUMMARY ———</h3>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
+        <div id="cart-items">
+            <!-- <div class="cart-item-container edge-space-e">
+                <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
+                <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
+                        class="body-font third-font-color">P55.00</span></h3>
+            </div> -->
         </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <div class="cart-item-container edge-space-e">
-            <img src="./img/affogato.png" alt="MODIFY THIS" class="cart-item-img float-left">
-            <h3 class="fw-bold ms-5 cart-item-name header-font float-left">Avocado ——— <span
-                    class="body-font third-font-color">P55.00</span></h3>
-        </div>
-        <h4 class="mt-5 fw-bold body-font fourth-font-color float-left section-width-max">Cart Total: P999.00</h4>
-        <h4 class="mb-5 fw-bold body-font fourth-font-color float-left  section-width-max">Number of Items: 4</h4>
+        <h4 class="mt-5 fw-bold body-font fourth-font-color float-left section-width-max">Cart Total: P<span
+                id="totalPrice"></span></h4>
+        <h4 class="mb-5 fw-bold body-font fourth-font-color float-left  section-width-max">Number of Items: <span
+                id="totalItems"></span></h4>
 
     </section>
 
     <!-- User Info Section -->
     <section class="section-width-max float-left second-bg-color user-info-section">
-        <form action="" method="post" class="float-left edge-space-s" id="userInfoForm">
+        <div class="float-left edge-space-s" id="userInfoForm">
             <h3 class="mt-5 fw-bold header-font fourth-font-color">——— USER INFORMATION ———</h3>
             <div class="section-width-max mt-5 float-left">
                 <div class="label-container float-left">
                     <label for="fnameInput" class="body-font float-left">First Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="fnameInput" name="fnameInput" class="float-right body-font fourth-font-color">
+                    <input type="text" id="fnameInput" name="fnameInput"
+                        class="float-right body-font fourth-font-color">
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
@@ -83,7 +73,8 @@
                     <label for="lnameInput" class="body-font float-left">Last Name</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="lnameInput" name="lnameInput" class="float-right body-font fourth-font-color">
+                    <input type="text" id="lnameInput" name="lnameInput"
+                        class="float-right body-font fourth-font-color">
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
@@ -91,7 +82,8 @@
                     <label for="shippingAddressInput" class="body-font float-left">Shipping Address</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="text" id="shippingAddressInput" name="shippingAddressInput" class="float-right body-font fourth-font-color">
+                    <input type="text" id="shippingAddressInput" name="shippingAddressInput"
+                        class="float-right body-font fourth-font-color">
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
@@ -99,15 +91,16 @@
                     <label for="contactInput" class="body-font float-left">Contact Number</label>
                 </div>
                 <div class="input-container float-left">
-                    <input type="tel" id="contactInput" name="contactInput" class="float-right body-font fourth-font-color">
+                    <input type="tel" id="contactInput" name="contactInput"
+                        class="float-right body-font fourth-font-color">
                 </div>
             </div>
             <div class="section-width-max mt-2 float-left">
-                <input type="button" value="Place Order" class="button2 fourth-bg-color float-left">
-                <input type="button" value="Cancel Order" class="button2 fourth-bg-color float-right">
+                <input type="button" onclick="placeOrder()" value="Place Order" class="button2 fourth-bg-color float-left">
+                <input type="button" onclick="returnHome()" value="Cancel Order" class="button2 fourth-bg-color float-right">
 
             </div>
-        </form>
+        </div>
     </section>
 
 
@@ -116,6 +109,73 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+    <script>
+        if (!sessionStorage.getItem("CURRENTUSER")) {
+            location.replace("./login.html");
+        }
+
+        sessionStorage.removeItem("CURRENTPRODUCT");
+        updateCartDisplay();
+
+        function updateCartDisplay() {
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+            const userCart = userAccount.cart;
+
+            // Clears the innerHTML of modal-body before adding the updated cart
+            document.getElementById("cart-items").innerHTML = "";
+
+            var totalItems = 0;
+            var totalPrice = 0;
+            userCart.forEach(item => {
+                var cartItemContainer = document.createElement("div");
+                cartItemContainer.classList.add("cart-item-container");
+                cartItemContainer.classList.add("edge-space-e");
+
+
+                cartItemContainer.innerHTML = `
+                    <img src="${item.imgSource}" alt="${item.name}" class="cart-item-img float-left">
+                    <h3 class="fw-bold ms-5 cart-item-name header-font float-left">${item.qty}x <span
+                        class="header-font third-font-color">——— ${item.name} ——— <span
+                            class="body-font third-font-color">P${item.price}</span></h3>    
+                `;
+
+                // Append the menu item to the current layer
+                document.getElementById("cart-items").appendChild(cartItemContainer);
+                totalItems += 1;
+                totalPrice += item.price;
+            });
+            document.getElementById("totalItems").innerHTML = totalItems;
+            document.getElementById("totalPrice").innerHTML = totalPrice;
+        }
+
+        function returnHome() {
+            location.replace("./index.html");
+        }
+
+
+        function placeOrder() {
+            const fname = document.getElementById("fnameInput").value;
+            const lname = document.getElementById("lnameInput").value;
+            const address = document.getElementById("shippingAddressInput").value;
+            const contact = document.getElementById("contactInput").value;
+
+            const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+            const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+
+            userAccount.userInformation = {
+                firstName: fname,
+                lastName: lname,
+                shippingAddress: address,
+                contactNumber: contact
+            };
+
+            sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount));
+
+            location.replace("./orderConfirmation.html");
+        }
+    </script>
 </body>
 
 </html>

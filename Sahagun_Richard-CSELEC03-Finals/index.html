@@ -77,9 +77,9 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="button2 danger-button">DELETE</button>
+                    <button type="button" class="button2 danger-button" onclick="deleteSelectedItems()">DELETE</button>
 
-                    <button type="button" class="button2">Select All</button>
+                    <button type="button" class="button2" onclick="selectAll()" id="selectAllBtn">Select All</button>
                     <button type="button" class="button2" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -96,6 +96,8 @@
     <script>
         // Displays the username in navbar upon onload
         window.addEventListener("load", () => {
+            sessionStorage.removeItem("CURRENTPRODUCT");
+
             // Validates if there's already user logged in, if not then it redirects user to login page.
             if(!sessionStorage.getItem("CURRENTUSER")) {
                 location.replace("./login.html");

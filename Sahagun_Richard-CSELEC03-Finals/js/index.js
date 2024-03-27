@@ -180,31 +180,65 @@ function updateCartDisplay() {
     const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
     const userCart = userAccount.cart;
 
-    console.log(userCart);
-    // If the cart is not empty, then it will be displayed in the modal
-    if(userCart.length !== 0) {
-        // Clears the innerHTML of modal-body before adding the updated cart
-        document.getElementsByClassName("modal-body")[0].innerHTML = "";
+    // Clears the innerHTML of modal-body before adding the updated cart
+    document.getElementsByClassName("modal-body")[0].innerHTML = "";
 
-        userCart.forEach(item => {
-            var cartItemContainer = document.createElement("div");
-            cartItemContainer.classList.add("cart-item-container");
-            
-    
-            cartItemContainer.innerHTML = `
+    userCart.forEach(item => {
+        var cartItemContainer = document.createElement("div");
+        cartItemContainer.classList.add("cart-item-container");
+
+
+        cartItemContainer.innerHTML = `
                 <div class="checkbox-container float-left">
-                    <input type="checkbox" class="float-left">
+                    <input type="checkbox" class="float-left select-item">
                 </div>
                 <img src="${item.imgSource}" alt="OODIFY THIS" class="cart-item-img float-left">
                 <div class="item-name-container float-left">
                     <h5 class="fw-bold ms-5 cart-item-name body-font float-left fourth-font-color">${item.qty}x <span
-                        class="header-font fourth-font-color">———</span> ${item.name} <span
+                        class="header-font fourth-font-color">——— </span><span class="item-name">${item.name}</span> <span
                         class="header-font fourth-font-color">———</span> P${item.price} </h5>
                 </div>        
             `;
-    
-            // Append the menu item to the current layer
-            document.getElementsByClassName("modal-body")[0].appendChild(cartItemContainer);
-        })
-    } 
+
+        // Append the menu item to the current layer
+        document.getElementsByClassName("modal-body")[0].appendChild(cartItemContainer);
+    });
+}
+
+
+function selectAll() {
+    var selectAllBtn = document.getElementById('selectAllBtn');
+    var checkboxesList = document.getElementsByClassName('select-item');
+
+    if (selectAllBtn.innerHTML === "Select All") {
+        for (var i = 0; i < checkboxesList.length; i++) {
+            checkboxesList[i].checked = true;
+        }
+        selectAllBtn.innerHTML = "Deselect All";
+    } else {
+        for (var i = 0; i < checkboxesList.length; i++) {
+            checkboxesList[i].checked = false;
+        }
+        selectAllBtn.innerHTML = "Select All";
+    }
+}
+
+function deleteSelectedItems() {
+    var isConfirmed = confirm("ARE YOU SURE?");
+
+    if (isConfirmed) {
+        const currentUser = JSON.parse(sessionStorage.getItem("CURRENTUSER"));
+        const userAccount = JSON.parse(sessionStorage.getItem(currentUser.username));
+        var checkboxesList = document.getElementsByClassName('select-item');
+        for (var i = 0; i < checkboxesList.length; i++) {
+            const checkbox = checkboxesList[i]
+            if (checkbox.checked === true) {
+                const deleteItemName = checkbox.parentElement.parentElement.querySelector(".item-name").innerHTML;
+
+                userAccount.cart = userAccount.cart.filter(item => item.name !== deleteItemName);
+            }
+        }
+        sessionStorage.setItem(userAccount.username, JSON.stringify(userAccount));
+        updateCartDisplay();
+    }
 }
