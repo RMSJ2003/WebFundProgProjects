@@ -190,12 +190,11 @@
                 invalid();
             }
 
-            const userInfoFilled = 
-                userAccount.userInformation.firstName &&
-                userAccount.userInformation.lastName &&
-                userAccount.userInformation.shippingAddress &&
-                userAccount.userInformation.contactNumber
-            ;
+            const userInfo = userAccount.userInformation;
+            const userInfoFilled = userInfo.firstName.trim() !== '' &&
+                userInfo.lastName.trim() !== '' &&
+                userInfo.shippingAddress.trim() !== '' &&
+                userInfo.contactNumber.trim() !== '';
 
             if (!userInfoFilled) {
                 invalid();
@@ -215,7 +214,7 @@
 
             if (userAccount.cart.length === 0) {
                 alert("Please make sure your cart is not empty before proceeding to order confirmation!");
-                location.replace("./index.html");   
+                location.replace("./index.html");
             }
         }
     </script>

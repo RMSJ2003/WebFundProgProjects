@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+      function ready(){
+        var addToCartButton = document.getElementsByClassName('addToCartButton')
+
+        for (var i = 0; i < addToCartButton.length; i++) {
+          addToCartButton[i].addEventListener('click', addToCart)
+        }
+
+        var cartItems = JSON.parse(localStorage.getItem('cartItems'))
+        if(cartItems !== null){
+          var cart = document.getElementById('cart')
+          for (var i = 0; i < cartItems.length; i++) {
+            var itemName = cartItems[i].itemName
+            var itemPrice = cartItems[i].itemPrice
+
+            var newDiv = document.createElement('div')
+
+            var newContent = `
+              <input class="selectItem" type="checkbox">
+              <p>${itemName}</p>
+              <p>${itemPrice}</p>
+            `
+            newDiv.innerHTML = newContent
+
+            cart.append(newDiv)
+          }
+        }
+
+      }
+
+      function addToCart(event){
+        var cart = document.getElementById('cart')
+        var button = event.target
+        var product = button.parentElement
+        var itemName = product.getElementsByClassName('item-name')[0].innerHTML
+        var itemPrice = product.getElementsByClassName('item-price')[0].innerHTML
+
+        var newDiv = document.createElement('div')
+
+        var newContent = `
+          <input class="selectItem" type="checkbox">
+          <p>${itemName}</p>
+          <p>${itemPrice}</p>
+        `
+        newDiv.innerHTML = newContent
+
+        cart.append(newDiv)
+
+        var cartItems = JSON.parse(localStorage.getItem('cartItems'))
+
+        if(cartItems !== null){
+          cartItems.push({itemName: itemName, itemPrice:itemPrice})
+          localStorage.setItem('cartItems', JSON.stringify(cartItems))
+        }else{
+          var newCartItems = [{itemName: itemName, itemPrice:itemPrice}]
+          localStorage.setItem('cartItems', JSON.stringify(newCartItems))
+        }
+
+      }
+      function deleteCartItems(){
+        var isConfirmed = confirm("ARE YOU SURE?")
+        var checkboxes = document.getElementsByClassName('selectItem')
+        var cartItems = JSON.parse(localStorage.getItem('cartItems'))
+      
+        if(isConfirmed){
+          //delete
+          // for (var i = 0; i < checkboxes.length; i++) {
+          for (var i = checkboxes.length-1; i >= 0 ; i--) {
+            if(checkboxes[i].checked){
+              //delete
+              checkboxes[i].parentElement.remove()
+              cartItems.splice(i,1)
+            }
+          }
+
+          localStorage.setItem('cartItems',JSON.stringify(cartItems))
+
+
+          console.log(cartItems)
+        }
+      }
+      function selectAllItems(){
+        var selectAllCheckbox = document.getElementById('selectAll')
+        var checkboxesList = document.getElementsByClassName('selectItem')
+        if(selectAllCheckbox.checked){
+          for (var i = 0; i < checkboxesList.length; i++) {
+            checkboxesList[i].checked = true
+          }
+        } else {
+          for (var i = 0; i < checkboxesList.length; i++) {
+            checkboxesList[i].checked = false
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="ready()">
+      <button type="button" name="button" onclick="deleteCartItems()">DELETE</button>
+      <br>
+      <input id="selectAll" type="checkbox" onchange="selectAllItems()">
+      <label for="selectAll">SELECT ALL</label>
+      <div id=cart>
+        <h2>MY CART</h2>
+      </div>
+
+      <div>
+        <p class="item-name">Item 1</p>
+        <p class="item-price">10.00</p>
+        <button class="addToCartButton" type="button" name="button">ADD TO CART 1</button>
+      </div>
+      <div>
+        <p class="item-name">Item 2</p>
+        <p class="item-price">20.00</p>
+        <button class="addToCartButton" type="button" name="button">ADD TO CART 2</button>
+      </div>
+      <div>
+        <p class="item-name">Item 3</p>
+        <p class="item-price">30.00</p>
+        <button class="addToCartButton" type="button" name="button">ADD TO CART 3</button>
+      </div>
+  </body>
+</html>

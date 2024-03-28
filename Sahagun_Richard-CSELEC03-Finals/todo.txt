@@ -9,6 +9,7 @@
 - Fix buttons and inputs
 - orderform first before confirmation
 - fix username name in navbar with username 
+- DELETE BUTTON shoudl be red
 
 ORDER FORM requires cart
 

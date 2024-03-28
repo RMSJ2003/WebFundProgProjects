@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 12 - Classes and Objects</title>
+</head>
+
+<body>
+    <button onclick="myCar.showCarName()">CLICK ME</button>
+    <script>
+        class Car {
+            constructor() {
+                this.name = "Mercedes";
+                this.year = "2024";
+                this.marc = {
+                    age: 16,
+                    gender: "male"
+                }
+                this.array = new Array("name1", "name2", "name3");
+                this.cars = [
+                    {
+                        name: "Ferrar1",
+                        type: "Super"
+                    },
+                    {
+                        name: "Porsche",
+                        type: "Super"
+                    }
+                ]
+
+            }
+
+            showCarName() {
+                this.addName();
+                alert(this.array[3]);
+
+                // Slice- Remves the 3rd element from the array
+                this.array.splice(2, 1);
+                alert(this.array);
+
+                alert(this.cars[1].name)
+
+                // PUshes a new car into the car arrays
+                this.cars.push({
+                    name: "Moster truck",
+                    type: "MOnster"
+                });
+
+                alert(this.cars[2].type);
+
+
+                // Add another multidimensional object to the cars
+                this.cars.push({
+                    name: "UFO",
+                    seats: {
+                        front: true,
+                        back: false
+                    }
+                });
+
+
+                // Pops the UFO car in the cars
+                this.cars.pop("UFO");
+
+                console.log(this.cars);
+
+
+                // Changes the value of jc item from the local storage
+                localStorage.setItem("jc", 25);
+            }
+
+            addName() {
+                this.array.push("Richard");
+            }
+        }
+
+        const myCar = new Car();
+
+
+
+
+        // Session storage and local storage
+        // These are objects data type
+
+        // LOCAL STORAGE
+        // 1st param: key, 2nd param: value
+        // Check sample
+        // Works when you closed the tab or reload
+        localStorage.setItem("jc", 19);
+
+
+        // SESSION STORAGE
+        // 1st param: key, 2nd param: value
+        // Works when only reload, not closed tab
+        sessionStorage.setItem("RJ", 21);
+
+
+        // Gets the value of the search item which is jc in this case
+        var fetch = localStorage.getItem('jc');
+        if (fetch !== null) console.log(fetch);
+        else console.log("null");
+
+
+        // Removing item from the localstorage
+        // localStorage.removeItem('jc');
+
+
+        // Removes all items from the localstorage
+        // localStorage.clear();
+
+        // Overrides the value of an item (example)
+        // localStorage.setItem("jc", 25);
+
+        
+
+        // TO READ OBJECT/ARRAY FROM ITEMS, YOU MUST CONVERT THEM FROM STRING TO JSON
+        // TO SET AN OBJECT/ARRAY IN THE ITEMS, YOU MUST CONVERT THEM FROM JSON TO STRING
+        
+        // Converts json object to string
+        localStorage.setItem("jm", 50);
+        JSON.stringify(localStorage.getItem("jm"));
+        var fetchJM = JSON.parse(localStorage.getItem("jm"));
+        console.log(fetchJM);
+
+
+
+
+
+
+        // CONFIRM FUNCITONALITY- AN ALERT BOX WITH 2 BUTTONS 1 FOR OK AND 1 FOR CANCEL
+        // Returns a boolean data type
+        var isConfirmed = confirm("Are you sure!");
+        if(isConfirmed) alert("confirmed");
+
+    </script>
+</body>
+
+</html>

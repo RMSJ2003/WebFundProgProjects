@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      class Person {
+        constructor(name, age){
+          this.name = name
+          this.age = age
+        }
+      }
+
+      var jc = new Person('jc', 19)
+      console.log(jc.name)
+      console.log(jc.age)
+      console.log(jc)
+
+      var marc = {
+        name : "marc",
+        age : 16
+      }
+
+      console.log(marc.name)
+      console.log(marc.age)
+      console.log(marc)
+
+      var array = new Array('name1','name2','name3')
+      var array2 = ['name4','name5','name6']
+      var array3 = []
+      array3.push('array 3 name 1')
+      array3.push('array 3 name 2')
+      console.log(array)
+      console.log(array2)
+      console.log(array3)
+      array[3] = "new name"
+      array.push("pushed name 1")
+      array.push("pushed name 2")
+      array.push("pushed name 3")
+      console.log(array)
+      array.splice(3,3)
+      console.log(array)
+
+      var jm = {
+        name : "jm",
+        age : 16
+      }
+      var shaun = new Person('shaun', 18)
+
+      var array4 = [jm, marc]
+      var array5 = [shaun, jc]
+      var array6 = [
+        {
+          name: "nikko",
+          age: 19
+        } ,
+        {
+          name : "rj",
+          age : 19
+        }
+      ]
+      var obj = {
+        name : "obj", age: 10
+      }
+      array4.push({ name: "marj", age:19})
+      array4.push(obj)
+      console.log(array4)
+      console.log(array6)
+      // console.log(array4[0].name)
+      // console.log(array4[0].age)
+      // console.log(array4[1].name)
+      // console.log(array4[1].age)
+
+      console.log(array5)
+      console.log(array5[0].name)
+      console.log(array5[0].age)
+      console.log(array5[1].name)
+      console.log(array5[1].age)
+
+      // array.pop()
+      // console.log(array)
+
+      //local storage and session storage
+      localStorage.setItem("jc", 19)
+      localStorage.setItem("jc1", 19)
+      localStorage.setItem("jc2", 19)
+      localStorage.setItem("jc3", 19)
+      //sessionStorage.setItem("jc", 19)
+      var fetch = localStorage.getItem('jc')
+      if(fetch !== null){
+        console.log("not null")
+      } else {
+        console.log("null")
+      }
+      console.log(fetch)
+
+      //localStorage.removeItem('jc')
+      //localStorage.clear()
+      //JSON - JavaScript Object Notation
+      localStorage.setItem("jc", 24)
+      console.log(jm)
+      localStorage.setItem('jm', JSON.stringify(jm))
+      var fetchJM = JSON.parse(localStorage.getItem("jm"))
+      console.log(fetchJM.age)
+
+      console.log(array4)
+      localStorage.setItem('arrayList', JSON.stringify(array4))
+      var getList = JSON.parse(localStorage.getItem('arrayList'))
+      console.log(getList[1].name)
+
+      var isConfirmed = confirm("TULOG KA BA MARC?")
+      console.log(isConfirmed)
+    </script>
+  </body>
+</html>
